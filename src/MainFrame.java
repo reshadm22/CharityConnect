@@ -271,7 +271,7 @@ public class MainFrame extends javax.swing.JFrame {
         AboutUsFrame about = new AboutUsFrame(userManager, charityList);
         about.setLocationRelativeTo(null);
         about.setVisible(true);
-        this.dispose(); // CLOSE MainFrame
+        this.dispose(); 
     }//GEN-LAST:event_btnAboutUsActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -345,7 +345,6 @@ public class MainFrame extends javax.swing.JFrame {
             lblName.setText("Welcome " + firstName);
         }
     }   
-
     
     /**
      * @param args the command line arguments

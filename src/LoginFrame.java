@@ -301,8 +301,7 @@ public class LoginFrame extends javax.swing.JFrame {
         }
 
         if (userManager.emailExists(email)) {
-            JOptionPane.showMessageDialog(this,
-                    "This email is already registered.");
+            JOptionPane.showMessageDialog(this, "This email is already registered.");
             return;
         }
 

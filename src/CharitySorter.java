@@ -11,18 +11,23 @@ import java.util.ArrayList;
 
 public class CharitySorter {
 
-    // Bubble sort by charity name (A–Z)
-    public static void sortByName(ArrayList<Charity> list) {
+    // Bubble sort by charity name (A–Z).  Bubble Sort works by repeatedly comparing adjacent elements
+    public static void sortByName(ArrayList<Charity> charities) {
+        // Outer loop controls the number of passes
+        for (int i = 0; i < charities.size() - 1; i++) {
+            // Inner loop compares adjacent charities
+            for (int j = 0; j < charities.size() - 1 - i; j++) {
 
-        for (int i = 0; i < list.size() - 1; i++) {
-            for (int j = 0; j < list.size() - 1 - i; j++) {
+                // Gets the current charity and the next charity
+                Charity current = charities.get(j);
+                Charity next = charities.get(j + 1);
 
-                if (list.get(j).getName()
-                        .compareToIgnoreCase(list.get(j + 1).getName()) > 0) {
+                // Compares the charity names alphabetically
+                if (current.getName().compareToIgnoreCase(next.getName()) > 0) {
 
-                    Charity temp = list.get(j);
-                    list.set(j, list.get(j + 1));
-                    list.set(j + 1, temp);
+                    // Swaps the two charities if they are out of order
+                    charities.set(j, next);
+                    charities.set(j + 1, current);
                 }
             }
         }
