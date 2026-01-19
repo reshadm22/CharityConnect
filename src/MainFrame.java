@@ -16,7 +16,6 @@ public class MainFrame extends javax.swing.JFrame {
     CharityManager charityManager;
     UserManager userManager;
 
-    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
 
     /**
