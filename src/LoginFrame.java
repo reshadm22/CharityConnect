@@ -9,10 +9,21 @@
  */
 import javax.swing.*;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class LoginFrame extends javax.swing.JFrame {
     private UserManager userManager;
     private ArrayList<Charity> charityList;
+    
+    private static final Pattern EMAIL_PATTERN =
+            Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
+
+    private static final Pattern NAME_PATTERN =
+            Pattern.compile("^[A-Za-z]+([ '\\-][A-Za-z]+)*$");
+    
+    private boolean isValidEmail(String email) {
+        return EMAIL_PATTERN.matcher(email).matches();
+    }
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginFrame.class.getName());
 
@@ -264,7 +275,7 @@ public class LoginFrame extends javax.swing.JFrame {
             return;
         }
 
-        if (!email.contains("@")) {
+        if (!isValidEmail(email)) {
             JOptionPane.showMessageDialog(this, "Invalid email format.");
             return;
         }
@@ -295,7 +306,7 @@ public class LoginFrame extends javax.swing.JFrame {
             return;
         }
 
-        if (!email.contains("@")) {
+        if (!isValidEmail(email)) {
             JOptionPane.showMessageDialog(this, "Invalid email format.");
             return;
         }
