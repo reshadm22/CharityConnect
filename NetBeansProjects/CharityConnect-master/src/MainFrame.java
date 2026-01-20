@@ -35,7 +35,14 @@ public class MainFrame extends javax.swing.JFrame {
        
         updateWelcomeLabel();
         
+        SearchPanel searchPanel = new SearchPanel(charityList);
+
+        JScrollPane scroll = new JScrollPane(searchPanel);
+        scroll.setBorder(null);                
+        scroll.getVerticalScrollBar().setUnitIncrement(16);
+
         pnlSearchHost.setLayout(new java.awt.BorderLayout());
+        pnlSearchHost.removeAll();
         pnlSearchHost.add(new SearchPanel(charityList), java.awt.BorderLayout.CENTER);
         pnlSearchHost.revalidate();
         pnlSearchHost.repaint();
