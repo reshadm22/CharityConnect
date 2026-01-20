@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
 import java.util.*;
 
 public class AboutUsFrame extends javax.swing.JFrame {
-        
+    // Reference to the existing MainFrame --> prevents creating a new MainFrame and losing session data   
     private MainFrame mainFrame;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AboutUsFrame.class.getName());
@@ -22,12 +22,13 @@ public class AboutUsFrame extends javax.swing.JFrame {
      */
     public AboutUsFrame(MainFrame mainFrame) {
         initComponents();
-        this.mainFrame = mainFrame;
+        this.mainFrame = mainFrame; // Stores the reference to the original MainFrame
         // Load and scale the image to fit the dimensions of the label
         ImageIcon image = new ImageIcon("C:\\Users\\resha\\OneDrive\\Desktop\\Documents\\NetBeansProjects\\CulminatingCopy\\charity.jpg");
         Image scaledImage = image.getImage().getScaledInstance(lblImage.getWidth(), lblImage.getHeight(), Image.SCALE_SMOOTH);
         lblImage.setIcon(new ImageIcon(scaledImage));
         
+        // Set the text for both text areas (Mission statement and contact info)
         txaContactUs.setText("Reshad Mohsin\nCoby Johns\nArujan Surendiran\nYuvraj Shahi\nThamil Ramathesun\n\nEmail: charityconnect@gmail.com");
         txaMission.setText("The mission of CharityConnect is to make it easier for people to discover and "
                 + "support local charities across the Greater Toronto Area. Many organizations do important work in their communities, "
@@ -158,9 +159,9 @@ public class AboutUsFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        mainFrame.setLocationRelativeTo(null);
-        mainFrame.setVisible(true);
-        this.dispose();
+        mainFrame.setLocationRelativeTo(null); // Centers the MainFrame
+        mainFrame.setVisible(true);// Makes the original MainFrame visible again
+        this.dispose(); // Closes the AboutUsFrame
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed

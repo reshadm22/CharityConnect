@@ -13,7 +13,7 @@ import javax.swing.*;
 public class AddCharityFrame extends javax.swing.JFrame {
     
     private UserManager userManager;
-    private ArrayList<Charity> charityList;
+    private ArrayList<Charity> charityList; // Reference to the database of charities
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddCharityFrame.class.getName());
 
@@ -22,12 +22,14 @@ public class AddCharityFrame extends javax.swing.JFrame {
      */
     public AddCharityFrame(UserManager userManager, ArrayList<Charity> charityList) {
         initComponents();
-        this.userManager = userManager;
-        this.charityList = charityList;
+        // Stores the UserManager reference so this frame knows and whether a user is logged in and who the current user is
+        this.userManager = userManager; 
+        this.charityList = charityList; // Stores the current charity list
         
+        // If logged in, display the user's first and last name in the welcome text field
         if (userManager.isLoggedIn()) {
             txtWelcomeName.setText(userManager.getCurrentUser().getFirstName() + " " + userManager.getCurrentUser().getLastName());
-        } else {
+        } else { // Otherwise it will say the default message: Welcome
             txtWelcomeName.setText("Welcome");
         }
     }
@@ -211,18 +213,19 @@ public class AddCharityFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // Reads all user input fields 
         String name = txtOrganization.getText().trim();
         String category = cmbCategory.getSelectedItem().toString();
         String city = txtCity.getText().trim();
         String description = txaDescription.getText().trim();
 
-        // VALIDATION: empty fields
+        // Validation --> checks for empty fields
         if (name.isEmpty() || city.isEmpty() || description.isEmpty()) {
             JOptionPane.showMessageDialog(this, "All fields must be filled.");
             return;
         }
 
-        // VALIDATION: duplicate charity name
+        // Validation --> duplicate charity names
         for (Charity c : charityList) {
             if (c.getName().equalsIgnoreCase(name)) {
                 JOptionPane.showMessageDialog(this, "A charity with this name already exists.");
@@ -230,7 +233,7 @@ public class AddCharityFrame extends javax.swing.JFrame {
             }
         }
 
-        // Create charity object
+        // Creates a new charity object
         Charity newCharity = new Charity(
                 name,
                 category,
@@ -238,21 +241,21 @@ public class AddCharityFrame extends javax.swing.JFrame {
                 description
         );
 
-        // Add to list
+        // Add charity to the Arraylist
         charityList.add(newCharity);
 
-        // Sort alphabetically (bubble sort)
+        // Sort alphabetically using bubble sort
         CharitySorter.sortByName(charityList);
 
-        // Save to file
+        // Save back to the database file
         CharityFileHandler.saveCharities("GTA_Charities_Database.txt", charityList);
 
-        JOptionPane.showMessageDialog(this, "Charity added successfully!");
+        JOptionPane.showMessageDialog(this, "Charity added successfully!"); // Message indicating success
 
-        // Return to MainFrame
+        // Return to MainFrame once submitted
         MainFrame main = new MainFrame(userManager, charityList);
-        main.setLocationRelativeTo(null);
-        main.setVisible(true);
+        main.setLocationRelativeTo(null); // Centers MainFrame
+        main.setVisible(true); // Makes MainFrame visible
 
         this.dispose();
     
@@ -263,11 +266,11 @@ public class AddCharityFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
+        // Returns to the MainFrame without saving anything
         MainFrame main = new MainFrame(userManager, charityList);
-        main.setLocationRelativeTo(null);
-        main.setVisible(true);
-
-        this.dispose();
+        main.setLocationRelativeTo(null); // Centers MainFrame
+        main.setVisible(true); // Makes MainFrame visible
+        this.dispose(); // Closes current frame
     }//GEN-LAST:event_btnReturnActionPerformed
 
     /**

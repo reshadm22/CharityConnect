@@ -12,16 +12,18 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class LoginFrame extends javax.swing.JFrame {
-    private UserManager userManager;
-    private ArrayList<Charity> charityList;
+    private UserManager userManager; // Keeps track of users and who is logged in
+    private ArrayList<Charity> charityList; // Shared list of charities passed between frames
     
+    // Regular expression pattern used to validate email format. Ensures the email looks like: example@email.com
     private static final Pattern EMAIL_PATTERN =
             Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
 
+    // Regular expression used to validate names. Allows letters, spaces, hyphens, and apostrophes.
     private static final Pattern NAME_PATTERN =
             Pattern.compile("^[A-Za-z]+([ '\\-][A-Za-z]+)*$");
     
-    private boolean isValidEmail(String email) {
+    private boolean isValidEmail(String email) { // Checks whether an email matches the required format.
         return EMAIL_PATTERN.matcher(email).matches();
     }
     
@@ -32,6 +34,7 @@ public class LoginFrame extends javax.swing.JFrame {
      */
     public LoginFrame(UserManager userManager, ArrayList<Charity> charityList) {
         initComponents();
+        // Stores references so data persists between frames
         this.userManager = userManager;
         this.charityList = charityList;
         
@@ -240,10 +243,10 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        MainFrame main = new MainFrame(userManager, charityList);
+        MainFrame main = new MainFrame(userManager, charityList); // Creates and shows the MainFrame in the center
         main.setLocationRelativeTo(null);
         main.setVisible(true);
-        this.dispose();
+        this.dispose(); // Closes current frame
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -251,88 +254,88 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void chkShowPasswordSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkShowPasswordSignUpActionPerformed
-        if (chkShowPasswordSignUp.isSelected()) {
-            pwdSignUpPassword.setEchoChar((char) 0); // show password
-        } else {
-            pwdSignUpPassword.setEchoChar('*'); // hide password again
+        if (chkShowPasswordSignUp.isSelected()) { // Shows password characters if selected
+            pwdSignUpPassword.setEchoChar((char) 0); 
+        } else { // Hides password characters again
+            pwdSignUpPassword.setEchoChar('*'); // 
         }
     }//GEN-LAST:event_chkShowPasswordSignUpActionPerformed
 
     private void chkShowPasswordLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkShowPasswordLoginActionPerformed
-        if (chkShowPasswordLogin.isSelected()) {
-            pwdLoginPassword.setEchoChar((char) 0); // show password
-        } else {
-            pwdLoginPassword.setEchoChar('*'); // hide password again
+        if (chkShowPasswordLogin.isSelected()) { // Shows password characters if selected
+            pwdLoginPassword.setEchoChar((char) 0); 
+        } else { // Hides password characters again
+            pwdLoginPassword.setEchoChar('*'); 
         }
     }//GEN-LAST:event_chkShowPasswordLoginActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        String email = txtLoginEmail.getText().trim();
+        String email = txtLoginEmail.getText().trim(); // Reads user input
         String password = new String(pwdLoginPassword.getPassword()).trim();
 
+        // Validation --> checks for empty fields
         if (email.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all login fields.");
             return;
         }
-
+        // Validation --> checks email format
         if (!isValidEmail(email)) {
             JOptionPane.showMessageDialog(this, "Invalid email format.");
             return;
         }
-
+        // Attempts login using UserManager
         if (!userManager.login(email, password)) {
             JOptionPane.showMessageDialog(this, "Incorrect email or password.");
             return;
         }
 
-        // SUCCESS
+        // Success if login was successful
         MainFrame main = new MainFrame(userManager, charityList);
         main.setLocationRelativeTo(null);
         main.setVisible(true);
 
-        this.dispose();
-        
+        this.dispose();  // Close LoginFrame
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    // Validates input and creates a new user account
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // Reads all registration input fields
         String fullName = txtInputName.getText().trim();
         String email = txtSignUpEmail.getText().trim();
         String password = new String(pwdSignUpPassword.getPassword()).trim();
 
-        // Validation
+        // Validation --> checks for empty fields
         if (fullName.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                    "All registration fields are required.");
+            JOptionPane.showMessageDialog(this, "All registration fields are required.");
             return;
         }
-
-        if (!isValidEmail(email)) {
+        
+        // Validation --> checks email format
+        if (!isValidEmail(email)) { 
             JOptionPane.showMessageDialog(this, "Invalid email format.");
             return;
         }
-
+        // Validation --> checks if email already exists
         if (userManager.emailExists(email)) {
             JOptionPane.showMessageDialog(this, "This email is already registered.");
             return;
         }
 
-        // Create user
+        // Creates a new user object
         User newUser = new User(fullName, email, password);
 
-        // Save to file
+        // Save it to the user database file
         UserFileHandler.saveUser("users.txt", newUser);
 
         // Log in immediately
         userManager.register(newUser);
+        JOptionPane.showMessageDialog(this, "Account created successfully!");
 
-        JOptionPane.showMessageDialog(this,
-                "Account created successfully!");
-
-        // Go to MainFrame
+        // Go back to MainFrame
         MainFrame main = new MainFrame(userManager, charityList);
         main.setLocationRelativeTo(null);
         main.setVisible(true);
-        this.dispose();
+        this.dispose(); // Close current frame
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**

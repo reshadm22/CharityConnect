@@ -12,27 +12,25 @@ import javax.swing.*;
 
 public class MainFrame extends javax.swing.JFrame {
     
-    ArrayList<Charity> charityList;
-    CharityManager charityManager;
-    UserManager userManager;
+    ArrayList<Charity> charityList; // Stores all charities loaded from the file
+    CharityManager charityManager; // Handles searching and displaying charities
+    UserManager userManager; // Manages users and login state
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
 
     /**
      * Creates new form MainFrame
-     */
-    public MainFrame() {
-        initComponents();
-    }
-    
+     */ // Main constructor used throughout the program.    
     public MainFrame(UserManager userManager, ArrayList<Charity> charityList) {
         initComponents();
-
+        // Stores references so data persists between frames
         this.userManager = userManager;
         this.charityList = charityList;
-
+        
+        // Creates a CharityManager to handle searching and displaying
         charityManager = new CharityManager(charityList);
-       
+        
+        // Updates the welcome label based on login state
         updateWelcomeLabel();
     }
 
@@ -245,10 +243,10 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAccountLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountLoginActionPerformed
-        LoginFrame login = new LoginFrame(userManager, charityList);
+        LoginFrame login = new LoginFrame(userManager, charityList); // Creates and displays LoginFrame
         login.setLocationRelativeTo(null);
         login.setVisible(true);
-        this.dispose(); // CLOSE MainFrame
+        this.dispose(); // close MainFrame
     }//GEN-LAST:event_btnAccountLoginActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -257,93 +255,98 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void txtInputMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtInputMouseEntered
         if (txtInput.getText().isBlank() || txtInput.getText().equals("Enter Here")) {
-            txtInput.setText("...");
+            txtInput.setText("..."); // Changes text to ... when mouse hovers over text field
         }
     }//GEN-LAST:event_txtInputMouseEntered
 
     private void txtInputMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtInputMouseExited
         if (txtInput.getText().isBlank() || txtInput.getText().equals("...")) {
-            txtInput.setText("Enter Here");
+            txtInput.setText("Enter Here"); // Changes text to Enter Here when mouse stops hovering over text field
         }
     }//GEN-LAST:event_txtInputMouseExited
 
     private void btnAboutUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutUsActionPerformed
-        AboutUsFrame about = new AboutUsFrame(this);
+        AboutUsFrame about = new AboutUsFrame(this); // Opens the AboutUsFrame and hides MainFrame
         about.setLocationRelativeTo(null);
         about.setVisible(true);
         this.setVisible(false); 
     }//GEN-LAST:event_btnAboutUsActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        txaOutput.setText("");
+        txaOutput.setText(""); // Clears any previous search results from the output text area
+        
+        // Gets all the user input from both the combo boxes and the search text field
         String keyword = txtInput.getText().trim();
         String searchBy = cmbSearchBy.getSelectedItem().toString();
         String category = cmbCategories.getSelectedItem().toString();
-
+        
+        // Prevents searching if the input is empty or still showing placeholder text
         if (keyword.isEmpty() | keyword.equals("...") | keyword.equals("Enter Here")) {
-            JOptionPane.showMessageDialog(this, "Please enter a search term.");
+            JOptionPane.showMessageDialog(this, "Please enter a search term."); // Error message
             return;
         }
-
+        // Calls the CharityManager search method and returns a list of charities that match
         ArrayList<Charity> results = charityManager.search(keyword, searchBy, category);
 
-        if (results.isEmpty()) {
+        if (results.isEmpty()) { // If no charities match the search criteria, display message
             txaOutput.setText("No charities found.");
             return;
         }
 
-        StringBuilder sb = new StringBuilder();
-        charityManager.displayResults(results, 0, sb);
+        StringBuilder sb = new StringBuilder(); // StringBuilder is used to efficiently build the output text
+        // Calls a recursive method to format and append each charity to the StringBuilder
+        charityManager.displayResults(results, 0, sb); 
 
-        txaOutput.setText(sb.toString());
+        txaOutput.setText(sb.toString()); // Displays the formatted search results in the text area
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnAddCharityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCharityActionPerformed
-        if (userManager == null) {
-            JOptionPane.showMessageDialog(this, "You must be logged in to add a charity.");
+        if (userManager == null) { // Checks if the UserManager object exists
+            JOptionPane.showMessageDialog(this, "You must be logged in to add a charity."); // Displays an error
             return;
-        } else if (!userManager.isLoggedIn()) {
-            JOptionPane.showMessageDialog(this, "You must be logged in to add a charity.");
+        } else if (!userManager.isLoggedIn()) { // Checks if a user exists but is not logged in
+            JOptionPane.showMessageDialog(this, "You must be logged in to add a charity."); // Displays an error
             return;
         }
-
+        
+        // If the user is logged in, open the AddCharityFrame
         AddCharityFrame add = new AddCharityFrame(userManager, charityList);
         add.setLocationRelativeTo(null);
         add.setVisible(true);
-        this.dispose(); // CLOSE MainFrame
+        this.dispose(); // Close MainFrame
     }//GEN-LAST:event_btnAddCharityActionPerformed
 
     private void btnAccountLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountLogOutActionPerformed
-        txaOutput.setText("");
-        if (userManager == null) {
+        txaOutput.setText(""); // Resets the output text area
+        if (userManager == null) { 
             JOptionPane.showMessageDialog(this, "You are not logged in.");
             return;
-        } else if (!userManager.isLoggedIn()) {
+        } else if (!userManager.isLoggedIn()) { // Displays error if not logged in already
             JOptionPane.showMessageDialog(this, "You are not logged in.");
             return;
         }
 
-        userManager.logout();
-        updateWelcomeLabel();
+        userManager.logout(); // Logs the user out using UserManager
+        updateWelcomeLabel(); // Updates the welcome label to reflect logout
 
-        JOptionPane.showMessageDialog(this, "You have been logged out.");
+        JOptionPane.showMessageDialog(this, "You have been logged out.");  // Confirms logout to the user
     }//GEN-LAST:event_btnAccountLogOutActionPerformed
 
     private void txtInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtInputMousePressed
         if (txtInput.getText().equals("..."))  {
-            txtInput.setText("");
+            txtInput.setText(""); // Changes text field from ... to blank when mouse is pressed
         }
     }//GEN-LAST:event_txtInputMousePressed
     
     private void updateWelcomeLabel() {
-        if (userManager == null) {
+        if (userManager == null) { // This prevents crashes if the frame is opened without user data
             lblName.setText("Welcome Guest");
-        } else if (!userManager.isLoggedIn()) {
-            lblName.setText("Welcome Guest");
+        } else if (!userManager.isLoggedIn()) { // Checks if the user is not logged in
+            lblName.setText("Welcome Guest"); // Displays Welcome Guest
         } else {
-            String firstName = userManager.getCurrentUser().getFirstName();
-            lblName.setText("Welcome " + firstName);
-        }
+            String firstName = userManager.getCurrentUser().getFirstName(); 
+            lblName.setText("Welcome " + firstName); // Displays Welcome First Name if user is logged in
+        } 
     }   
     
     /**
