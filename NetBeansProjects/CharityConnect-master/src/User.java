@@ -1,45 +1,52 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author resha
- */
 public class User {
 
     private String fullName;
     private String email;
     private String password;
+    private boolean isAdmin;
 
     public User(String fullName, String email, String password) {
+        this(fullName, email, password, false);
+    }
+
+    public User(String fullName, String email, String password, boolean isAdmin) {
         this.fullName = fullName;
         this.email = email;
         this.password = password;
+        this.isAdmin = isAdmin;
+    }
+
+    public String getFullName() {
+        return fullName;
     }
 
     public String getFirstName() {
-        return fullName.split(" ")[0];
+        String[] parts = fullName.trim().split("\\s+");
+        return parts.length >= 1 ? parts[0] : "";
     }
-    
+
     public String getLastName() {
-        return fullName.split(" ")[1];
+        String[] parts = fullName.trim().split("\\s+");
+        return parts.length >= 2 ? parts[parts.length - 1] : "";
     }
 
     public String getEmail() {
         return email;
     }
-    
+
     public String getPassword() {
         return password;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
     public boolean checkPassword(String input) {
         return password.equals(input);
     }
-    
+
     public String toFileString() {
-        return fullName + " | " + email + " | " + password;
+        return fullName + " | " + email + " | " + password + " | " + (isAdmin ? "ADMIN" : "USER");
     }
 }

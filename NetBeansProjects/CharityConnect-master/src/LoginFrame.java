@@ -274,7 +274,9 @@ public class LoginFrame extends javax.swing.JFrame {
             return;
         }
 
+        
         // SUCCESS
+
         MainFrame main = new MainFrame(userManager, charityList);
         main.setLocationRelativeTo(null);
         main.setVisible(true);

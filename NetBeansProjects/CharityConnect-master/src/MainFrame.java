@@ -32,6 +32,8 @@ public class MainFrame extends javax.swing.JFrame {
         this.charityList = charityList;
 
         charityManager = new CharityManager(charityList);
+        
+        btnManageCharities.setVisible(userManager != null && userManager.isAdminLoggedIn());
        
         updateWelcomeLabel();
         
@@ -69,6 +71,7 @@ public class MainFrame extends javax.swing.JFrame {
         lblName = new javax.swing.JLabel();
         btnAccountLogOut = new javax.swing.JButton();
         pnlSearchHost = new javax.swing.JPanel();
+        btnManageCharities = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,6 +137,13 @@ public class MainFrame extends javax.swing.JFrame {
             .addGap(0, 181, Short.MAX_VALUE)
         );
 
+        btnManageCharities.setText("MANAGE CHARITIES");
+        btnManageCharities.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageCharitiesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,7 +173,8 @@ public class MainFrame extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(btnAddCharity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblStartCharity))
-                            .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnManageCharities))
                         .addGap(27, 27, 27))))
         );
         layout.setVerticalGroup(
@@ -188,7 +199,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblStartCharity)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAddCharity))
+                        .addComponent(btnAddCharity)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnManageCharities))
                     .addComponent(pnlSearchHost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(246, Short.MAX_VALUE))
         );
@@ -243,7 +256,20 @@ public class MainFrame extends javax.swing.JFrame {
         updateWelcomeLabel();
 
         JOptionPane.showMessageDialog(this, "You have been logged out.");
+        this.dispose(); 
+        MainFrame main = new MainFrame(userManager, charityList);
+        main.setLocationRelativeTo(null);
+        main.setVisible(true);
     }//GEN-LAST:event_btnAccountLogOutActionPerformed
+
+    private void btnManageCharitiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCharitiesActionPerformed
+        if (userManager == null || !userManager.isAdminLoggedIn()) {
+            JOptionPane.showMessageDialog(this, "Admin access required.");
+            return;
+        }
+
+        new ManageCharitiesFrame(userManager, charityList, "GTA_Charities_Database.txt");
+    }//GEN-LAST:event_btnManageCharitiesActionPerformed
     
     private void updateWelcomeLabel() {
         if (userManager == null) {
@@ -254,8 +280,7 @@ public class MainFrame extends javax.swing.JFrame {
             String firstName = userManager.getCurrentUser().getFirstName();
             lblName.setText("Welcome " + firstName);
         }
-    }   
-
+    }  
     
     /**
      * @param args the command line arguments
@@ -285,6 +310,7 @@ public class MainFrame extends javax.swing.JFrame {
         MainFrame main = new MainFrame(userManager, charities);
         main.setLocationRelativeTo(null); 
         main.setVisible(true);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -293,6 +319,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnAccountLogin;
     private javax.swing.JButton btnAddCharity;
     private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnManageCharities;
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblStartCharity;

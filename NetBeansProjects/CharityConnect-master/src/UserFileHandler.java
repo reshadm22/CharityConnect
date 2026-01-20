@@ -1,12 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author resha
- */
 import java.io.*;
 import java.util.ArrayList;
 
@@ -19,10 +10,17 @@ public class UserFileHandler {
             String line;
 
             while ((line = br.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty()) continue;
+
                 String[] parts = line.split("\\s*\\|\\s*");
 
                 if (parts.length == 3) {
-                    users.add(new User(parts[0], parts[1], parts[2]));
+                    users.add(new User(parts[0], parts[1], parts[2], false));
+                }
+                else if (parts.length >= 4) {
+                    boolean isAdmin = "ADMIN".equalsIgnoreCase(parts[3].trim());
+                    users.add(new User(parts[0], parts[1], parts[2], isAdmin));
                 }
             }
         } catch (IOException e) {
@@ -41,4 +39,3 @@ public class UserFileHandler {
         }
     }
 }
-

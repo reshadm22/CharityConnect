@@ -53,6 +53,7 @@
                               <Component id="lblStartCharity" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="lblName" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                          <Component id="btnManageCharities" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
@@ -86,6 +87,8 @@
                       <Component id="lblStartCharity" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnAddCharity" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="btnManageCharities" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="pnlSearchHost" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -198,5 +201,13 @@
         </DimensionLayout>
       </Layout>
     </Container>
+    <Component class="javax.swing.JButton" name="btnManageCharities">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="MANAGE CHARITIES"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageCharitiesActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

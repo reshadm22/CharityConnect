@@ -1,1 +1,3 @@
 Reshad Mohsin | reshad.mohsin@gmail.com | 12345
+Admin | admin@charityconnect.ca | admin123 | ADMIN
+abcd | 1234@gmail.com | 123 | USER

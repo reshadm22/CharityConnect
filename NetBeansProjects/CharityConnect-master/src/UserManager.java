@@ -1,12 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author resha
- */
 import java.util.ArrayList;
 
 public class UserManager {
@@ -20,8 +11,7 @@ public class UserManager {
 
     public boolean login(String email, String password) {
         for (User u : users) {
-            if (u.getEmail().equalsIgnoreCase(email)
-                    && u.getPassword().equals(password)) {
+            if (u.getEmail().equalsIgnoreCase(email) && u.getPassword().equals(password)) {
                 currentUser = u;
                 return true;
             }
@@ -54,5 +44,8 @@ public class UserManager {
     public User getCurrentUser() {
         return currentUser;
     }
-}
 
+    public boolean isAdminLoggedIn() {
+        return isLoggedIn() && currentUser != null && currentUser.isAdmin();
+    }
+}

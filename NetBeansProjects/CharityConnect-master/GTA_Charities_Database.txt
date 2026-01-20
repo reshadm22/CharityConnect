@@ -2,11 +2,11 @@ Alzheimer’s Society of Peel | Health | Mississauga | Provides support programs
 Big Brothers Big Sisters of Peel | Education | Brampton | Delivers mentoring programs that help children and youth build confidence and achieve success.
 Boys and Girls Club of Peel | Education | Mississauga | Offers after‑school programs, recreation and leadership development for children and youth.
 Burlington Food Bank | Hunger/Poverty | Burlington | Distributes groceries and food hampers to Burlington residents facing food insecurity.
-COTA Health | Health | Toronto | Supports adults with mental health challenges and brain injuries through community‑based programs.
 Caledon Community Services | Social Services | Caledon | Provides food support, senior programs, transportation and community services for Caledon residents.
 Canadian Mental Health Association – Peel | Health | Brampton | Offers mental health counselling, crisis support and community wellness services.
 Catholic Family Services Peel‑Dufferin | Social Services | Mississauga | Provides counselling, family support and newcomer settlement services.
 Community Care Durham | Social Services | Oshawa | Provides senior support, Meals on Wheels and community programs.
+COTA Health | Health | Toronto | Supports adults with mental health challenges and brain injuries through community‑based programs.
 Covenant House Toronto | Housing | Toronto | Provides shelter, healthcare and life‑skills programs for homeless and at‑risk youth.
 Daily Bread Food Bank | Hunger/Poverty | Toronto | Supplies food to a network of agencies and advocates to end hunger in Toronto.
 Dress for Success Toronto | Social Services | Toronto | Helps women achieve economic independence through professional clothing and career support.
@@ -23,8 +23,8 @@ Hospice Mississauga | Health | Mississauga | Provides palliative care and grief 
 Hospice Vaughan | Health | Vaughan | Provides palliative and bereavement services for Vaughan residents.
 Humane Society of Burlington | Animals | Burlington | Provides shelter and adoption services for animals in Burlington.
 Humane Society of Oakville & Milton | Animals | Oakville | Rescues, shelters and rehomes abandoned animals in Halton.
-ISSRA | Social Services | Mississauga | Provides culturally sensitive counselling and support to vulnerable families.
 India Rainbow Community Services | Social Services | Brampton | Supports newcomers with settlement, counselling and integration programs.
+ISSRA | Social Services | Mississauga | Provides culturally sensitive counselling and support to vulnerable families.
 Markham Food Bank | Hunger/Poverty | Markham | Provides food assistance to low‑income Markham residents.
 Markham Stouffville Hospital Foundation | Health | Markham | Raises funds to enhance healthcare services and equipment.
 Milton Community Food Pantry | Hunger/Poverty | Milton | Distributes groceries twice monthly to Milton families in need.
@@ -35,6 +35,7 @@ Newmarket Charitable Foundation | Social Services | Newmarket | Funds local char
 Oakville Community Foundation | Social Services | Oakville | Supports local charities through grants and philanthropic initiatives.
 Ontario SPCA Durham | Animals | Whitby | Provides shelter and adoption services for animals in Durham Region.
 Pathways to Education | Education | Toronto | Helps students in low‑income communities graduate through mentoring and tutoring.
+random | Other | Markham | charity
 Richmond Hill Community Food Bank | Hunger/Poverty | Richmond Hill | Provides emergency food support to families in Richmond Hill.
 Seva Food Bank | Hunger/Poverty | Mississauga | Provides culturally appropriate food for Peel families.
 Simcoe Hall Settlement House | Hunger/Poverty | Oshawa | Operates a food bank and community support programs in Oshawa.
