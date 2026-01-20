@@ -217,13 +217,14 @@
     <Component class="javax.swing.JComboBox" name="cmbCategory">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="6">
+          <StringArray count="7">
             <StringItem index="0" value="Other"/>
             <StringItem index="1" value="Hunger/Poverty"/>
             <StringItem index="2" value="Education"/>
             <StringItem index="3" value="Animals"/>
             <StringItem index="4" value="Health"/>
             <StringItem index="5" value="Social Services"/>
+            <StringItem index="6" value="Housing"/>
           </StringArray>
         </Property>
       </Properties>

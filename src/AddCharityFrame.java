@@ -86,7 +86,7 @@ public class AddCharityFrame extends javax.swing.JFrame {
         txaDescription.setRows(5);
         jScrollPane1.setViewportView(txaDescription);
 
-        cmbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Other", "Hunger/Poverty", "Education", "Animals", "Health", "Social Services" }));
+        cmbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Other", "Hunger/Poverty", "Education", "Animals", "Health", "Social Services", "Housing" }));
 
         lblWebsite.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblWebsite.setText("Website (optional):");
