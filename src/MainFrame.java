@@ -268,10 +268,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtInputMouseExited
 
     private void btnAboutUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutUsActionPerformed
-        AboutUsFrame about = new AboutUsFrame(userManager, charityList);
+        AboutUsFrame about = new AboutUsFrame(this);
         about.setLocationRelativeTo(null);
         about.setVisible(true);
-        this.dispose(); 
+        this.setVisible(false); 
     }//GEN-LAST:event_btnAboutUsActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed

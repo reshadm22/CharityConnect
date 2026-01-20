@@ -13,16 +13,16 @@ import java.util.*;
 
 public class AboutUsFrame extends javax.swing.JFrame {
         
-    private UserManager userManager;
-    private ArrayList<Charity> charityList;
+    private MainFrame mainFrame;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AboutUsFrame.class.getName());
 
     /**
      * Creates new form AddCharity
      */
-    public AboutUsFrame(UserManager userManager, ArrayList<Charity> charityList) {
+    public AboutUsFrame(MainFrame mainFrame) {
         initComponents();
+        this.mainFrame = mainFrame;
         // Load and scale the image to fit the dimensions of the label
         ImageIcon image = new ImageIcon("C:\\Users\\resha\\OneDrive\\Desktop\\Documents\\NetBeansProjects\\CulminatingCopy\\charity.jpg");
         Image scaledImage = image.getImage().getScaledInstance(lblImage.getWidth(), lblImage.getHeight(), Image.SCALE_SMOOTH);
@@ -158,10 +158,8 @@ public class AboutUsFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        MainFrame main = new MainFrame();
-        main.setLocationRelativeTo(null);
-        main.setVisible(true);
-
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnReturnActionPerformed
 
